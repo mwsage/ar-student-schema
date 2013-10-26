@@ -3,11 +3,13 @@ require_relative '../../db/config'
 class Student < ActiveRecord::Base
 # implement your Student model here
 
-    validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}
-      #:message => "did not provide the proper email format" }
-    validates :email, :uniqueness => true
-    validates :age, :numericality => {:greater_than => 5}
-    validates :phone, :format => { :with => /.*\d{3}.*\d{3}.*\d{4}.*/}
+  has_and_belongs_to_many :teachers
+
+  validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}
+    #:message => "did not provide the proper email format" }
+  validates :email, :uniqueness => true
+  validates :age, :numericality => {:greater_than => 5}
+  validates :phone, :format => { :with => /.*\d{3}.*\d{3}.*\d{4}.*/}
 
   def name
     #Students.all.each do |student|
